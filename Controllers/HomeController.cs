@@ -15,6 +15,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewData["Area"] = "Admin";
+        ViewData["Message"] = "Admin Panel.";
         return View();
     }
 

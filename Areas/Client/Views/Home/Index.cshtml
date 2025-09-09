@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Клієнт";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-info">@ViewData["Message"]</h1>
+            <div class="alert alert-info">
+                <h4>Доступні функції:</h4>
+                <ul>
+                    <li>Перегляд доступних автомобілів</li>
+                    <li>Бронювання авто</li>
+                    <li>Мої бронювання</li>
+                    <li>Історія оренди</li>
+                </ul>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Доступні авто</h5>
+                            <p class="card-text">Переглянути каталог</p>
+                            <a href="#" class="btn btn-info">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Мої бронювання</h5>
+                            <p class="card-text">Активні та минулі</p>
+                            <a href="@Url.Action("Bookings", "Home", new { area = "Client" })" class="btn btn-info">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

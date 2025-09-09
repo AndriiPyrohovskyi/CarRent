@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Менеджер";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-success">@ViewData["Message"]</h1>
+            <div class="alert alert-success">
+                <h4>Функції менеджера:</h4>
+                <ul>
+                    <li>Підтвердження бронювань</li>
+                    <li>Управління договорами</li>
+                    <li>Контроль платежів</li>
+                    <li>Обслуговування клієнтів</li>
+                </ul>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Нові бронювання</h5>
+                            <p class="card-text">Очікують підтвердження</p>
+                            <a href="@Url.Action("Orders", "Home", new { area = "Manager" })" class="btn btn-success">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Договори</h5>
+                            <p class="card-text">Управління договорами</p>
+                            <a href="#" class="btn btn-success">Переглянути</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

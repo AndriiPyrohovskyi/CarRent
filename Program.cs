@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using CarRent.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Додаємо Entity Framework Core
+builder.Services.AddDbContext<CarRentContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 
@@ -20,6 +27,10 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+ 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
