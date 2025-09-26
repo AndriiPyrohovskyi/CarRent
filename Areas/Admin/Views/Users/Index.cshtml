@@ -1,0 +1,64 @@
+@model IEnumerable<CarRent.Models.User>
+
+@{
+    ViewData["Title"] = "Управління користувачами";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+    <p class="text-muted">Адміністративна панель для керування користувачами системи</p>
+
+    <div class="mb-3">
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus"></i> Додати нового користувача
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Ім'я</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Роль</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Id</td>
+                        @* <td>@user.Name</td> *@
+                        <td>@user.Email</td>
+                        <td>@user.Phone</td>
+                        <td>
+                            <span class="badge bg-@(user.Role == "Admin" ? "danger" : user.Role == "Manager" ? "warning" : "primary")">
+                                @user.Role
+                            </span>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@user.Id" class="btn btn-sm btn-outline-info">
+                                Переглянути
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-outline-warning">
+                                Редагувати
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <h5>Користувачів не знайдено</h5>
+            <p>Поки що немає жодного користувача в системі.</p>
+        </div>
+    }
+</div>

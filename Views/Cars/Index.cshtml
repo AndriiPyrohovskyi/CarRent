@@ -1,0 +1,91 @@
+@model List<CarRent.Models.Car>
+
+@{
+    ViewData["Title"] = "Автомобілі";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>🚗 Наш автопарк</h2>
+            <p class="text-muted">Всього автомобілів: @Model.Count</p>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var car in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(car.ImageUrl))
+                    {
+                        <img src="@car.ImageUrl" class="card-img-top" alt="@car.Brand @car.Model" style="height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <i class="fas fa-car fa-3x text-muted"></i>
+                        </div>
+                    }
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">@car.Brand @car.Model</h5>
+                        <p class="card-text">
+                            <strong>Рік:</strong> @car.Year<br>
+                            <strong>Номер:</strong> @car.LicensePlate<br>
+                            <strong>Ціна:</strong> <span class="text-success">@car.PricePerDay.ToString("C") / день</span>
+                        </p>
+                        
+                        @if (!string.IsNullOrEmpty(car.Description))
+                        {
+                            <p class="card-text text-muted">@car.Description</p>
+                        }
+                    </div>
+                    
+                    <div class="card-footer">
+                        @if (car.IsAvailable)
+                        {
+                            <span class="badge bg-success">✅ Доступний</span>
+                            <a href="#" class="btn btn-primary btn-sm float-end">Забронювати</a>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">❌ Зайнятий</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+    @if (!Model.Any())
+    {
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="alert alert-info">
+                    <h4>Автомобілів поки немає</h4>
+                    <p>Додайте автомобілі до системи</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // 🎯 ПРОСТИЙ JavaScript для інтерактивності
+        console.log('Завантажено @Model.Count автомобілів');
+    </script>
+}
+
+@* 
+🎯 ЯК ЦЕ ПРАЦЮЄ:
+
+1. @model - тип даних від контролера (List<Car>)
+2. @foreach - цикл по всіх автомобілях  
+3. Bootstrap класи - красивий вигляд
+4. @car.Property - відображення властивостей
+5. Умови @if - різна логіка відображення
+
+✅ ПРОСТО і ЕФЕКТИВНО!
+*@
